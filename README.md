@@ -24,7 +24,8 @@ A browser-only, educational Mines-style game (5×5 grid, 1–24 mines) that demo
 - app.js – logic, cryptography, math, and interactions.
 
 ## Running
-Open index.html directly in a modern browser; no build or server is required.
+Open index.html directly in a modern browser; no build or server is required.  
+The Github Pages version can be accessed [here](https://pragspud.github.io/mock-money-mines/).
 
 ## Verifying a round
 1. Start a round to see the server seed hash (commitment) and the effective client seed and nonce.
