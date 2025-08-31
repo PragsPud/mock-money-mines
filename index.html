@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mines (Mock Money, Provably-Fair Style)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#mainBoard" class="skip-link">Skip to board</a>
+
+  <div class="app">
+    <div class="panel">
+      <h1 id="controlsFormTitle">Mines (Mock)</h1>
+      <div class="sub">5×5 grid, pick safe tiles, cash out anytime; this demo includes a provably-fair style seed commit-and-reveal flow.</div>
+
+      <div class="balance" aria-live="polite">
+        <div>
+          <div class="muted">Balance</div>
+          <strong id="balance">$1,000.00</strong>
+        </div>
+        <div class="badge" id="roundBadge">Idle</div>
+      </div>
+
+      <form id="controlsForm" role="form" aria-labelledby="controlsFormTitle" novalidate>
+        <div class="controls">
+          <div>
+            <label id="label-bet" for="bet">Bet amount</label>
+            <input id="bet" name="bet" type="number" min="0.01" step="0.01" value="1.00" aria-labelledby="label-bet" inputmode="decimal" />
+          </div>
+
+          <div class="row">
+            <div>
+              <label id="label-mines" for="mines">Mines (1–24)</label>
+              <input id="mines" name="mines" type="number" min="1" max="24" value="3" aria-labelledby="label-mines" inputmode="numeric" />
+            </div>
+            <div>
+              <label id="label-edge" for="edge">House edge (0–10%)</label>
+              <input id="edge" name="edge" type="number" min="0" max="10" step="0.1" value="3.0" aria-labelledby="label-edge" inputmode="decimal" />
+            </div>
+          </div>
+
+          <div>
+            <label id="label-client-seed" for="clientSeed">Client seed (optional)</label>
+            <input id="clientSeed" name="clientSeed" placeholder="Leave blank for random" aria-labelledby="label-client-seed" />
+          </div>
+
+          <div class="btn-row">
+            <button class="btn primary" id="newGameBtn" type="button">Start round</button>
+            <button class="btn success" id="cashOutBtn" type="button" disabled>Cash out</button>
+          </div>
+
+          <div class="status" id="statusBox" aria-live="polite">
+            <div class="left">
+              <div class="muted">Safe picks: <span id="safeCount">0</span></div>
+              <div class="muted">Current multiplier: <span id="multiplier">1.00×</span></div>
+            </div>
+            <div class="right">
+              <div class="muted">Cash out value</div>
+              <div><strong id="cashOutValue">$0.00</strong></div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div>
+              <label id="label-server-hash">Server seed (hash, pre-commit)</label>
+              <div class="hashbox" id="serverHash" aria-labelledby="label-server-hash">—</div>
+            </div>
+            <div>
+              <label id="label-server-seed">Server seed (revealed after round)</label>
+              <div class="hashbox" id="serverSeed" aria-labelledby="label-server-seed">—</div>
+            </div>
+            <div class="row">
+              <div>
+                <label id="label-client-show">Client seed (effective)</label>
+                <div class="hashbox" id="clientSeedShow" aria-labelledby="label-client-show">—</div>
+              </div>
+              <div>
+                <label id="label-nonce">Nonce</label>
+                <div class="hashbox" id="nonceShow" aria-labelledby="label-nonce">—</div>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button class="btn" id="verifyBtn" type="button" disabled>Verify commitment</button>
+              <button class="btn" id="nextRoundBtn" type="button" disabled>Next round</button>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            Educational demo only; not affiliated with any brand, and uses mock money with transparent math and seeding for learning purposes.
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="panel">
+      <h2 style="margin:0 0 12px 0;font-size:18px;">Board</h2>
+      <div class="grid" id="mainBoard" aria-label="Mines board, 5 by 5" tabindex="0"></div>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
